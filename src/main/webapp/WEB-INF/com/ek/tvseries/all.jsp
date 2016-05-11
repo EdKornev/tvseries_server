@@ -1,38 +1,34 @@
 <%@ page import="com.ek.serialsserver.tvseries.routes.TVSeriesRoutes" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Eduard
-  Date: 04.05.2016
-  Time: 1:37
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Title</title>
+    <link href="/static/css/bootstrap.css" rel="stylesheet"/>
 </head>
 <body>
-    <form action="<%=TVSeriesRoutes.ADD%>" method="post">
-        <input name="title" placeholder="Title"/>
-        <input name="description" placeholder="Description"/>
-        <input type="submit" value="Add"/>
-    </form>
-    <table>
-        <thead>
+<div class="container">
+    <div class="row">
+        <a href="<%=TVSeriesRoutes.ADD%>" class="btn btn-success">Create tv series</a>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead>
             <tr>
-                <th>Заголовок</th>
-                <th>Описание</th>
+                <th>Title</th>
+                <th>Description</th>
             </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${tv_series}" var="tv">
-            <tr>
-                <td>${tv.title}</td>
-                <td>${tv.description}</td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            <c:forEach items="${tv_series}" var="tv">
+                <tr>
+                    <td><a href="/tv/${tv.id}">${tv.title}</a></td>
+                    <td>${tv.description}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>

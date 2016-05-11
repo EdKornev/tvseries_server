@@ -8,4 +8,6 @@ public class TVSeriesRoutes {
 
     public static final String ALL = BASE_ROUTE + "/all";
     public static final String ADD = BASE_ROUTE + "/add";
+    public static final String EDIT = BASE_ROUTE + "/{id}";
+    public static final String REMOVE = BASE_ROUTE + "/remove";
 }

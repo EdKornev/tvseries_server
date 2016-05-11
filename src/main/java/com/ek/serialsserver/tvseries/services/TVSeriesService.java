@@ -1,6 +1,7 @@
 package com.ek.serialsserver.tvseries.services;
 
 import com.ek.serialsserver.tvseries.models.TVSeriesModel;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
@@ -19,11 +20,76 @@ public class TVSeriesService {
         return mongoTemplate.findAll(TVSeriesModel.class);
     }
 
-    public void create(String title, String description) {
+    /**
+     * Create new tv show
+     * @param title
+     * @param description
+     * @param original
+     * @param producer
+     * @param countries
+     * @param genres
+     */
+    public TVSeriesModel create(String title, String description, String original, String producer, String countries, String genres) {
         TVSeriesModel model = new TVSeriesModel();
         model.setTitle(title);
         model.setDescription(description);
+        model.setOriginalTitle(original);
+        model.setProducer(producer);
+
+        for(String country : countries.split(", ")) {
+            model.getCountries().add(country);
+        }
+
+        for(String genre : genres.split(", ")) {
+            model.getCountries().add(genre);
+        }
 
         mongoTemplate.save(model);
+
+        return model;
+    }
+
+    /**
+     * Update tv show
+     * @param id
+     * @param title
+     * @param description
+     * @param original
+     * @param producer
+     * @param countries
+     * @param genres
+     */
+    public void update(ObjectId id, String title, String description, String original, String producer, String countries, String genres) {
+        TVSeriesModel model = findById(id);
+
+        if (model == null) {
+            return;
+        }
+
+        model.setTitle(title);
+        model.setDescription(description);
+        model.setOriginalTitle(original);
+        model.setProducer(producer);
+
+        model.getCountries().clear();
+        for(String country : countries.split(", ")) {
+            model.getCountries().add(country);
+        }
+
+        model.getGenres().clear();
+        for(String genre : genres.split(", ")) {
+            model.getGenres().add(genre);
+        }
+
+        mongoTemplate.save(model);
+    }
+
+    /**
+     * Find tv show by id
+     * @param id - id show
+     * @return
+     */
+    public TVSeriesModel findById(ObjectId id) {
+        return mongoTemplate.findById(id, TVSeriesModel.class);
     }
 }
