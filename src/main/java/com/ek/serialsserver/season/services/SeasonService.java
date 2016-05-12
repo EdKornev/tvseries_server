@@ -64,6 +64,36 @@ public class SeasonService {
         return seasonModel;
     }
 
+    public SeasonModel removeShow(ObjectId id, Integer number) {
+        SeasonModel seasonModel = findById(id);
+
+        if (seasonModel == null) {
+            return null;
+        }
+
+        for (ShowModel showModel : seasonModel.getShows()) {
+            if (showModel.getNumber().equals(number)) {
+                seasonModel.getShows().remove(showModel);
+                mongoTemplate.save(seasonModel);
+                break;
+            }
+        }
+
+        return seasonModel;
+    }
+
+    public SeasonModel remove(ObjectId id) {
+        SeasonModel seasonModel = findById(id);
+
+        if (seasonModel == null) {
+            return null;
+        }
+
+        mongoTemplate.remove(seasonModel);
+
+        return seasonModel;
+    }
+
     public SeasonModel findById(ObjectId id) {
         return mongoTemplate.findById(id, SeasonModel.class);
     }

@@ -12,4 +12,5 @@ public class SeasonRoutes {
     public static final String REMOVE = BASE_ROUTE + "/remove";
 
     public static final String SHOW_ADD = SHOW_BASE_ROUTE + "/add";
+    public static final String SHOW_REMOVE = SHOW_BASE_ROUTE + "/remove";
 }

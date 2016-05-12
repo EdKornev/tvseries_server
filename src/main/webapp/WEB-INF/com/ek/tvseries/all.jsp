@@ -17,6 +17,7 @@
             <tr>
                 <th>Title</th>
                 <th>Description</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -24,6 +25,14 @@
                 <tr>
                     <td><a href="/tv/${tv.id}">${tv.title}</a></td>
                     <td>${tv.description}</td>
+                    <td>
+                        <form action="<%=TVSeriesRoutes.REMOVE%>" method="post">
+                            <input type="hidden" name="id" value="${tv.id}"/>
+                            <button class="btn btn-default btn-sm">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remove
+                            </button>
+                        </form>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>

@@ -1,5 +1,7 @@
 package com.ek.serialsserver.tvseries.services;
 
+import com.ek.serialsserver.season.models.SeasonModel;
+import com.ek.serialsserver.season.services.SeasonService;
 import com.ek.serialsserver.tvseries.models.TVSeriesModel;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import java.util.List;
 public class TVSeriesService {
 
     @Autowired private MongoTemplate mongoTemplate;
+    @Autowired private SeasonService seasonService;
 
     public List<TVSeriesModel> all() {
         return mongoTemplate.findAll(TVSeriesModel.class);
@@ -82,6 +85,25 @@ public class TVSeriesService {
         }
 
         mongoTemplate.save(model);
+    }
+
+    /**
+     * Remove tv show
+     * @param id
+     */
+    public void remove(ObjectId id) {
+        TVSeriesModel tvSeriesModel = findById(id);
+
+        if (tvSeriesModel == null) {
+            return;
+        }
+
+        mongoTemplate.remove(tvSeriesModel);
+
+        List<SeasonModel> seasons = seasonService.findByTvShowId(id);
+        for (SeasonModel seasonModel : seasons) {
+            mongoTemplate.remove(seasonModel);
+        }
     }
 
     /**

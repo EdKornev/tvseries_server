@@ -60,4 +60,11 @@ public class TVSeriesController {
 
         return "redirect:/tv/" + id;
     }
+
+    @RequestMapping(value = TVSeriesRoutes.REMOVE, method = RequestMethod.POST)
+    public String remove(@RequestParam ObjectId id) {
+        tvSeriesService.remove(id);
+
+        return "redirect:/tv/all";
+    }
 }

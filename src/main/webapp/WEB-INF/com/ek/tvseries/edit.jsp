@@ -80,7 +80,13 @@
                 <c:url value="<%=SeasonRoutes.SHOW_ADD%>" var="url_add_show">
                     <c:param name="id" value="${season.id}"/>
                 </c:url>
-                <a href="${url_add_show}" class="btn btn-success">Add show</a>
+                <a href="${url_add_show}" class="btn btn-success" style="float: left; margin-right: 15px;">Add show</a>
+                <form action="<%=SeasonRoutes.REMOVE%>" method="post">
+                    <input type="hidden" name="id" value="${season.id}"/>
+                    <button class="btn btn-default">
+                        <span class="glyphicon glyphicon-remove"></span> Remove
+                    </button>
+                </form>
             </div>
         </div>
         <div class="row">
@@ -90,6 +96,7 @@
                     <th>№</th>
                     <th>Title</th>
                     <th>Url</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -98,6 +105,15 @@
                         <td>${show.number}</td>
                         <td>${show.title}</td>
                         <td>${show.path}</td>
+                        <td>
+                            <form action="<%=SeasonRoutes.SHOW_REMOVE%>" method="post">
+                                <input type="hidden" name="id" value="${season.id}"/>
+                                <input type="hidden" name="number" value="${show.number}"/>
+                                <button class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-remove"></span> Remove
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>

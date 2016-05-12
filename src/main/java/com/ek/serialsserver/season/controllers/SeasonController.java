@@ -27,6 +27,17 @@ public class SeasonController {
         return "redirect:/tv/" + tvShowId;
     }
 
+    @RequestMapping(value = SeasonRoutes.REMOVE, method = RequestMethod.POST)
+    public String remove(@RequestParam ObjectId id) {
+        SeasonModel seasonModel = seasonService.remove(id);
+
+        if (seasonModel == null) {
+            return "redirect:/tv/all";
+        } else {
+            return "redirect:/tv/" + seasonModel.getTvSeries().getId();
+        }
+    }
+
     @RequestMapping(value = SeasonRoutes.SHOW_ADD, method = RequestMethod.GET)
     public String addShow(@RequestParam ObjectId id, Model model) {
         model.addAttribute("id", id);
@@ -38,6 +49,17 @@ public class SeasonController {
     public String addShow(@RequestParam ObjectId id, @RequestParam String title,
                           @RequestParam String path, @RequestParam Integer number) {
         SeasonModel seasonModel = seasonService.addShow(id, title, path, number);
+
+        if (seasonModel == null) {
+            return "redirect:/tv/all";
+        } else {
+            return "redirect:/tv/" + seasonModel.getTvSeries().getId();
+        }
+    }
+
+    @RequestMapping(value = SeasonRoutes.SHOW_REMOVE, method = RequestMethod.POST)
+    public String removeShow(@RequestParam ObjectId id, @RequestParam Integer number) {
+        SeasonModel seasonModel = seasonService.removeShow(id, number);
 
         if (seasonModel == null) {
             return "redirect:/tv/all";
