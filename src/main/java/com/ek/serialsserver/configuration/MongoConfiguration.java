@@ -1,8 +1,13 @@
 package com.ek.serialsserver.configuration;
 
 import com.mongodb.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
+import org.springframework.core.env.Environment;
 import org.springframework.data.authentication.UserCredentials;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -12,25 +17,41 @@ import java.util.Arrays;
 
 /**
  * Created by Eduard on 04.05.2016.
+ * Configure database
  */
 @Configuration
 @EnableMongoRepositories
+@PropertySources({
+        @PropertySource("classpath:resources/database.properties"),
+        @PropertySource("classpath:resources/app.properties")
+})
 public class MongoConfiguration extends AbstractMongoConfiguration {
-    private static final String DATABASE_NAME = "tvshow";
-    private static final String DATABASE_HOST = "127.4.58.130";
-//    private static final String DATABASE_HOST = "127.0.0.1";
-//    private static final String DATABASE_NAME = "serials_server";
+
+    @Autowired private Environment env;
+
+    @Value("${app.debug}")
+    private Boolean isDebug;
 
     @Override
     protected String getDatabaseName() {
-        return DATABASE_NAME;
+        if (isDebug) {
+            return env.getProperty("mongo.db");
+        } else {
+            return env.getProperty("mongo.prod.db");
+        }
     }
 
     @Override
     public Mongo mongo() throws Exception {
-        ServerAddress serverAddress = new ServerAddress(DATABASE_HOST, 27017);
-        MongoCredential mongoCredential = MongoCredential.createMongoCRCredential("admin", getDatabaseName(), "NTvcU2jj_KdB"/*"Fender1990"*/.toCharArray());
-        return new MongoClient(serverAddress, Arrays.asList(mongoCredential));
+        if (isDebug) {
+            ServerAddress serverAddress = new ServerAddress(env.getProperty("mongo.host"), 27017);
+            MongoCredential mongoCredential = MongoCredential.createMongoCRCredential(env.getProperty("mongo.username"), getDatabaseName(), env.getProperty("mongo.password").toCharArray());
+            return new MongoClient(serverAddress, Arrays.asList(mongoCredential));
+        } else {
+            ServerAddress serverAddress = new ServerAddress(env.getProperty("mongo.host"), 27017);
+            MongoCredential mongoCredential = MongoCredential.createMongoCRCredential(env.getProperty("mongo.username"), getDatabaseName(), env.getProperty("mongo.password").toCharArray());
+            return new MongoClient(serverAddress, Arrays.asList(mongoCredential));
+        }
     }
 
     @Override
@@ -38,8 +59,8 @@ public class MongoConfiguration extends AbstractMongoConfiguration {
         return "com.ek.serialsserver";
     }
 
-    @Override
     @Bean
+    @Override
     public MongoTemplate mongoTemplate() throws Exception {
         MongoTemplate mongoTemplate = new MongoTemplate(mongo(), getDatabaseName());
         return mongoTemplate;

@@ -7,6 +7,6 @@
 </head>
 <body>
     <h1>Hello world</h1>
-    <a href="<%=IndexRoutes.BASE_PREFIX%><%=TVSeriesRoutes.ALL%>">TV Series</a>
+    <a href="<%=IndexRoutes.getRoute(TVSeriesRoutes.ALL)%>">TV Series</a>
 </body>
 </html>

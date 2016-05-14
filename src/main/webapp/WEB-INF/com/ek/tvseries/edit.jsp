@@ -4,7 +4,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link href="<%=IndexRoutes.BASE_PREFIX%>/static/css/bootstrap.css" rel="stylesheet"/>
+    <link href="<%=IndexRoutes.getRoute("/static/css/bootstrap.css")%>" rel="stylesheet"/>
     <title>${tvSeriesModel.title}</title>
 </head>
 <body>
@@ -14,7 +14,7 @@
             <h1>${tvSeriesModel.title}</h1>
         </div>
     </div>
-    <form action="<%=IndexRoutes.BASE_PREFIX%>/tv/${tvSeriesModel.id}" method="post">
+    <form action="<%=IndexRoutes.getRoute("")%>/tv/${tvSeriesModel.id}" method="post">
         <div class="row">
             <div class="form-group col-md-6">
                 <input name="title" placeholder="Title" class="form-control" value="${tvSeriesModel.title}"/>
@@ -58,7 +58,7 @@
         </div>
     </div>
 
-    <form action="<%=IndexRoutes.BASE_PREFIX%><%=SeasonRoutes.ADD%>" method="post">
+    <form action="<%=IndexRoutes.getRoute(SeasonRoutes.ADD)%>" method="post">
         <input type="hidden" name="tvShowId" value="${tvSeriesModel.id}"/>
 
         <div class="row">
@@ -78,11 +78,11 @@
         <div class="row">
             <div class="col-md-9">
                 <h3>Season ${season.number}</h3>
-                <c:url value="<%=IndexRoutes.BASE_PREFIX%><%=SeasonRoutes.SHOW_ADD%>" var="url_add_show">
+                <c:url value="<%=IndexRoutes.getRoute(SeasonRoutes.SHOW_ADD)%>" var="url_add_show">
                     <c:param name="id" value="${season.id}"/>
                 </c:url>
                 <a href="${url_add_show}" class="btn btn-success" style="float: left; margin-right: 15px;">Add show</a>
-                <form action="<%=IndexRoutes.BASE_PREFIX%><%=SeasonRoutes.REMOVE%>" method="post">
+                <form action="<%=IndexRoutes.getRoute(SeasonRoutes.REMOVE)%>" method="post">
                     <input type="hidden" name="id" value="${season.id}"/>
                     <button class="btn btn-default">
                         <span class="glyphicon glyphicon-remove"></span> Remove
@@ -107,7 +107,7 @@
                         <td>${show.title}</td>
                         <td>${show.path}</td>
                         <td>
-                            <form action="<%=IndexRoutes.BASE_PREFIX%><%=SeasonRoutes.SHOW_REMOVE%>" method="post">
+                            <form action="<%=IndexRoutes.getRoute(SeasonRoutes.SHOW_REMOVE)%>" method="post">
                                 <input type="hidden" name="id" value="${season.id}"/>
                                 <input type="hidden" name="number" value="${show.number}"/>
                                 <button class="btn btn-default btn-sm">

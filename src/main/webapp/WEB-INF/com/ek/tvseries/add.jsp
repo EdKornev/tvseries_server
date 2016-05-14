@@ -3,12 +3,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link href="<%=IndexRoutes.BASE_PREFIX%>/static/css/bootstrap.css" rel="stylesheet"/>
+    <link href="<%=IndexRoutes.getRoute("/static/css/bootstrap.css")%>" rel="stylesheet"/>
     <title>Add tv</title>
 </head>
 <body>
 <div class="container">
-    <form action="<%=IndexRoutes.BASE_PREFIX%><%=TVSeriesRoutes.ADD%>" method="post">
+    <form action="<%=IndexRoutes.getRoute(TVSeriesRoutes.ADD)%>" method="post">
         <div class="row">
             <div class="form-group col-md-6">
                 <input name="title" placeholder="Title" class="form-control"/>

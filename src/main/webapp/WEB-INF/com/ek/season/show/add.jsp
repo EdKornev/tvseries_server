@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link href="<%=IndexRoutes.BASE_PREFIX%>/static/css/bootstrap.css" rel="stylesheet"/>
+    <link href="<%=IndexRoutes.getRoute("/static/css/bootstrap.css")%>" rel="stylesheet"/>
     <title>Add show</title>
 </head>
 <body>
@@ -13,7 +13,7 @@
             <h1>Add show</h1>
         </div>
     </div>
-    <form action="<%=IndexRoutes.BASE_PREFIX%><%=SeasonRoutes.SHOW_ADD%>" method="post">
+    <form action="<%=IndexRoutes.getRoute(SeasonRoutes.SHOW_ADD)%>" method="post">
         <input type="hidden" name="id" value="${id}"/>
         <div class="row">
             <div class="form-group col-md-6">

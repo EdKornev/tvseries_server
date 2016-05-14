@@ -5,12 +5,12 @@
 <html>
 <head>
     <title>Title</title>
-    <link href="<%=IndexRoutes.BASE_PREFIX%>/static/css/bootstrap.css" rel="stylesheet"/>
+    <link href="<%=IndexRoutes.getRoute("/static/css/bootstrap.css")%>" rel="stylesheet"/>
 </head>
 <body>
 <div class="container">
     <div class="row">
-        <a href="<%=IndexRoutes.BASE_PREFIX%><%=TVSeriesRoutes.ADD%>" class="btn btn-success">Create tv series</a>
+        <a href="<%=IndexRoutes.getRoute(TVSeriesRoutes.ADD)%>" class="btn btn-success">Create tv series</a>
     </div>
     <div class="row">
         <table class="table">
@@ -24,10 +24,10 @@
             <tbody>
             <c:forEach items="${tv_series}" var="tv">
                 <tr>
-                    <td><a href="<%=IndexRoutes.BASE_PREFIX%>/tv/${tv.id}">${tv.title}</a></td>
+                    <td><a href="<%=IndexRoutes.getRoute("/tv/")%>${tv.id}">${tv.title}</a></td>
                     <td>${tv.description}</td>
                     <td>
-                        <form action="<%=IndexRoutes.BASE_PREFIX%><%=TVSeriesRoutes.REMOVE%>" method="post">
+                        <form action="<%=IndexRoutes.getRoute(TVSeriesRoutes.REMOVE)%>" method="post">
                             <input type="hidden" name="id" value="${tv.id}"/>
                             <button class="btn btn-default btn-sm">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remove
