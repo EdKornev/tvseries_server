@@ -10,23 +10,26 @@
 <body>
 <div class="container">
     <div class="row">
+        <h1>All tv shows</h1>
+    </div>
+    <div class="row">
         <a href="<%=IndexRoutes.getRoute(TVSeriesRoutes.ADD)%>" class="btn btn-success">Create tv series</a>
     </div>
     <div class="row">
         <table class="table">
             <thead>
             <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th></th>
+                <th style="width: 30%;">Title</th>
+                <th style="width: 55%;">Description</th>
+                <th style="width: 15%;"></th>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${tv_series}" var="tv">
                 <tr>
-                    <td><a href="<%=IndexRoutes.getRoute("/tv/")%>${tv.id}">${tv.title}</a></td>
-                    <td>${tv.description}</td>
-                    <td>
+                    <td style="width: 30%;"><a href="<%=IndexRoutes.getRoute("/tv/")%>${tv.id}">${tv.title}</a></td>
+                    <td style="width: 55%;">${tv.description}</td>
+                    <td style="width: 15%;">
                         <form action="<%=IndexRoutes.getRoute(TVSeriesRoutes.REMOVE)%>" method="post">
                             <input type="hidden" name="id" value="${tv.id}"/>
                             <button class="btn btn-default btn-sm">

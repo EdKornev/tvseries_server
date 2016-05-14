@@ -44,7 +44,7 @@ public class TVSeriesService {
         }
 
         for(String genre : genres.split(", ")) {
-            model.getCountries().add(genre);
+            model.getGenres().add(genre);
         }
 
         mongoTemplate.save(model);

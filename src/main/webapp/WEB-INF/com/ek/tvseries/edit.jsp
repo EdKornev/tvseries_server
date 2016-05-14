@@ -78,7 +78,7 @@
         <div class="row">
             <div class="col-md-9">
                 <h3>Season ${season.number}</h3>
-                <c:url value="<%=IndexRoutes.getRoute(SeasonRoutes.SHOW_ADD)%>" var="url_add_show">
+                <c:url value="<%=SeasonRoutes.SHOW_ADD%>" var="url_add_show">
                     <c:param name="id" value="${season.id}"/>
                 </c:url>
                 <a href="${url_add_show}" class="btn btn-success" style="float: left; margin-right: 15px;">Add show</a>
@@ -94,19 +94,19 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th>№</th>
-                    <th>Title</th>
-                    <th>Url</th>
-                    <th></th>
+                    <th style="width: 5%;">№</th>
+                    <th style="width: 40%;">Title</th>
+                    <th style="width: 40%;">Url</th>
+                    <th style="width: 15%;"></th>
                 </tr>
                 </thead>
                 <tbody>
                 <c:forEach items="${season.shows}" var="show">
                     <tr>
-                        <td>${show.number}</td>
-                        <td>${show.title}</td>
-                        <td>${show.path}</td>
-                        <td>
+                        <td style="width: 5%;">${show.number}</td>
+                        <td style="width: 40%;">${show.title}</td>
+                        <td style="width: 40%;">${show.path}</td>
+                        <td style="width: 15%;">
                             <form action="<%=IndexRoutes.getRoute(SeasonRoutes.SHOW_REMOVE)%>" method="post">
                                 <input type="hidden" name="id" value="${season.id}"/>
                                 <input type="hidden" name="number" value="${show.number}"/>

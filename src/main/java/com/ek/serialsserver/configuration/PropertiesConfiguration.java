@@ -11,7 +11,7 @@ import org.springframework.context.annotation.PropertySource;
  * Configure application properties
  */
 @Configuration
-@PropertySource("classpath:resources/app.properties")
+@PropertySource("resources/app.properties")
 public class PropertiesConfiguration {
 
     @Value("${app.debug}")

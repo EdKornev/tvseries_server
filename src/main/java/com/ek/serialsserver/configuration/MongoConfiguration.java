@@ -22,8 +22,8 @@ import java.util.Arrays;
 @Configuration
 @EnableMongoRepositories
 @PropertySources({
-        @PropertySource("classpath:resources/database.properties"),
-        @PropertySource("classpath:resources/app.properties")
+        @PropertySource("resources/database.properties"),
+        @PropertySource("resources/app.properties")
 })
 public class MongoConfiguration extends AbstractMongoConfiguration {
 
@@ -48,8 +48,8 @@ public class MongoConfiguration extends AbstractMongoConfiguration {
             MongoCredential mongoCredential = MongoCredential.createMongoCRCredential(env.getProperty("mongo.username"), getDatabaseName(), env.getProperty("mongo.password").toCharArray());
             return new MongoClient(serverAddress, Arrays.asList(mongoCredential));
         } else {
-            ServerAddress serverAddress = new ServerAddress(env.getProperty("mongo.host"), 27017);
-            MongoCredential mongoCredential = MongoCredential.createMongoCRCredential(env.getProperty("mongo.username"), getDatabaseName(), env.getProperty("mongo.password").toCharArray());
+            ServerAddress serverAddress = new ServerAddress(env.getProperty("mongo.prod.host"), 27017);
+            MongoCredential mongoCredential = MongoCredential.createMongoCRCredential(env.getProperty("mongo.prod.username"), getDatabaseName(), env.getProperty("mongo.prod.password").toCharArray());
             return new MongoClient(serverAddress, Arrays.asList(mongoCredential));
         }
     }
