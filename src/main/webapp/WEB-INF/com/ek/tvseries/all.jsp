@@ -1,15 +1,16 @@
 <%@ page import="com.ek.serialsserver.tvseries.routes.TVSeriesRoutes" %>
+<%@ page import="com.ek.serialsserver.index.routes.IndexRoutes" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Title</title>
-    <link href="/static/css/bootstrap.css" rel="stylesheet"/>
+    <link href="<%=IndexRoutes.BASE_PREFIX%>/static/css/bootstrap.css" rel="stylesheet"/>
 </head>
 <body>
 <div class="container">
     <div class="row">
-        <a href="<%=TVSeriesRoutes.ADD%>" class="btn btn-success">Create tv series</a>
+        <a href="<%=IndexRoutes.BASE_PREFIX%><%=TVSeriesRoutes.ADD%>" class="btn btn-success">Create tv series</a>
     </div>
     <div class="row">
         <table class="table">
@@ -23,10 +24,10 @@
             <tbody>
             <c:forEach items="${tv_series}" var="tv">
                 <tr>
-                    <td><a href="/tv/${tv.id}">${tv.title}</a></td>
+                    <td><a href="<%=IndexRoutes.BASE_PREFIX%>/tv/${tv.id}">${tv.title}</a></td>
                     <td>${tv.description}</td>
                     <td>
-                        <form action="<%=TVSeriesRoutes.REMOVE%>" method="post">
+                        <form action="<%=IndexRoutes.BASE_PREFIX%><%=TVSeriesRoutes.REMOVE%>" method="post">
                             <input type="hidden" name="id" value="${tv.id}"/>
                             <button class="btn btn-default btn-sm">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remove

@@ -16,15 +16,20 @@ import java.util.Arrays;
 @Configuration
 @EnableMongoRepositories
 public class MongoConfiguration extends AbstractMongoConfiguration {
+    private static final String DATABASE_NAME = "tvshow";
+    private static final String DATABASE_HOST = "127.4.58.130";
+//    private static final String DATABASE_HOST = "127.0.0.1";
+//    private static final String DATABASE_NAME = "serials_server";
+
     @Override
     protected String getDatabaseName() {
-        return "serials_server";
+        return DATABASE_NAME;
     }
 
     @Override
     public Mongo mongo() throws Exception {
-        ServerAddress serverAddress = new ServerAddress("127.0.0.1", 27017);
-        MongoCredential mongoCredential = MongoCredential.createMongoCRCredential("admin", getDatabaseName(), "Fender1990".toCharArray());
+        ServerAddress serverAddress = new ServerAddress(DATABASE_HOST, 27017);
+        MongoCredential mongoCredential = MongoCredential.createMongoCRCredential("admin", getDatabaseName(), "NTvcU2jj_KdB"/*"Fender1990"*/.toCharArray());
         return new MongoClient(serverAddress, Arrays.asList(mongoCredential));
     }
 
