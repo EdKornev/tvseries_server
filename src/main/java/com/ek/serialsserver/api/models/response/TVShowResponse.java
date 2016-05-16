@@ -18,10 +18,12 @@ public class TVShowResponse {
     private List<String> genres = new ArrayList<String>();
     private List<String> countries = new ArrayList<String>();
 
+    private List<SeasonResponse> seasons = new ArrayList<SeasonResponse>();
+
     public TVShowResponse() {
     }
 
-    public TVShowResponse(TVSeriesModel model) {
+    public TVShowResponse(TVSeriesModel model, List<SeasonResponse> seasons) {
         this.id = model.getId().toHexString();
         this.title = model.getTitle();
         this.originalTitle = model.getOriginalTitle();
@@ -29,6 +31,7 @@ public class TVShowResponse {
         this.producer = model.getProducer();
         this.genres = model.getGenres();
         this.countries = model.getCountries();
+        this.seasons = seasons;
     }
 
     public String getId() {
@@ -85,5 +88,13 @@ public class TVShowResponse {
 
     public void setCountries(List<String> countries) {
         this.countries = countries;
+    }
+
+    public List<SeasonResponse> getSeasons() {
+        return seasons;
+    }
+
+    public void setSeasons(List<SeasonResponse> seasons) {
+        this.seasons = seasons;
     }
 }
