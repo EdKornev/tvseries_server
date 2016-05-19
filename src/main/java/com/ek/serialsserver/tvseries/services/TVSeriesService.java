@@ -1,5 +1,6 @@
 package com.ek.serialsserver.tvseries.services;
 
+import com.ek.serialsserver.picture.services.PictureService;
 import com.ek.serialsserver.season.models.SeasonModel;
 import com.ek.serialsserver.season.services.SeasonService;
 import com.ek.serialsserver.tvseries.models.TVSeriesModel;
@@ -7,6 +8,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -18,6 +20,7 @@ public class TVSeriesService {
 
     @Autowired private MongoTemplate mongoTemplate;
     @Autowired private SeasonService seasonService;
+    @Autowired private PictureService pictureService;
 
     public List<TVSeriesModel> all() {
         return mongoTemplate.findAll(TVSeriesModel.class);
@@ -32,7 +35,7 @@ public class TVSeriesService {
      * @param countries
      * @param genres
      */
-    public TVSeriesModel create(String title, String description, String original, String producer, String countries, String genres) {
+    public TVSeriesModel create(String title, String description, String original, String producer, String countries, String genres, MultipartFile picture) {
         TVSeriesModel model = new TVSeriesModel();
         model.setTitle(title);
         model.setDescription(description);
@@ -46,6 +49,8 @@ public class TVSeriesService {
         for(String genre : genres.split(", ")) {
             model.getGenres().add(genre);
         }
+
+        model.setPicture(pictureService.save(picture));
 
         mongoTemplate.save(model);
 
@@ -62,7 +67,9 @@ public class TVSeriesService {
      * @param countries
      * @param genres
      */
-    public void update(ObjectId id, String title, String description, String original, String producer, String countries, String genres) {
+    public void update(ObjectId id, String title, String description,
+                       String original, String producer, String countries,
+                       String genres, MultipartFile picture) {
         TVSeriesModel model = findById(id);
 
         if (model == null) {
@@ -83,6 +90,8 @@ public class TVSeriesService {
         for(String genre : genres.split(", ")) {
             model.getGenres().add(genre);
         }
+
+        model.setPicture(pictureService.save(picture));
 
         mongoTemplate.save(model);
     }

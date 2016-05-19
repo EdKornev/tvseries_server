@@ -1,6 +1,7 @@
 package com.ek.serialsserver.api.models.response;
 
 import com.ek.serialsserver.tvseries.models.TVSeriesModel;
+import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ public class TVShowResponse {
     private String originalTitle;
     private String description;
     private String producer;
+    private ObjectId picture;
     private List<String> genres = new ArrayList<String>();
     private List<String> countries = new ArrayList<String>();
 
@@ -96,5 +98,13 @@ public class TVShowResponse {
 
     public void setSeasons(List<SeasonResponse> seasons) {
         this.seasons = seasons;
+    }
+
+    public ObjectId getPicture() {
+        return picture;
+    }
+
+    public void setPicture(ObjectId picture) {
+        this.picture = picture;
     }
 }

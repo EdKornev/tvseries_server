@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="container">
-    <form action="<%=IndexRoutes.getRoute(TVSeriesRoutes.ADD)%>" method="post">
+    <form action="<%=IndexRoutes.getRoute(TVSeriesRoutes.ADD)%>" method="post" enctype="multipart/form-data">
         <div class="row">
             <div class="form-group col-md-6">
                 <input name="title" placeholder="Title" class="form-control"/>
@@ -37,6 +37,11 @@
         <div class="row">
             <div class="form-group col-md-6">
                 <input name="genres" placeholder="Genres" class="form-control"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <input type="file" name="picture" class="form-control"/>
             </div>
         </div>
         <div class="row">

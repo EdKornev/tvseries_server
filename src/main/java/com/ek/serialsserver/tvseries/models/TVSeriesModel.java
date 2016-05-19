@@ -20,6 +20,7 @@ public class TVSeriesModel {
     private String originalTitle;
     private String description;
     private String producer;
+    private ObjectId picture;
     private List<String> genres = new ArrayList<String>();
     private List<String> countries = new ArrayList<String>();
 
@@ -102,5 +103,13 @@ public class TVSeriesModel {
 
     public void setCountries(List<String> countries) {
         this.countries = countries;
+    }
+
+    public ObjectId getPicture() {
+        return picture;
+    }
+
+    public void setPicture(ObjectId picture) {
+        this.picture = picture;
     }
 }

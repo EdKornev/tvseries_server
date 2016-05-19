@@ -11,6 +11,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.data.authentication.UserCredentials;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import java.util.Arrays;
@@ -64,5 +65,10 @@ public class MongoConfiguration extends AbstractMongoConfiguration {
     public MongoTemplate mongoTemplate() throws Exception {
         MongoTemplate mongoTemplate = new MongoTemplate(mongo(), getDatabaseName());
         return mongoTemplate;
+    }
+
+    @Bean
+    public GridFsTemplate gridFsTemplate() throws Exception {
+        return new GridFsTemplate(mongoDbFactory(), mappingMongoConverter());
     }
 }

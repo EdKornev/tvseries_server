@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Created by Eduard on 04.05.2016.
@@ -37,8 +38,9 @@ public class TVSeriesController {
     @RequestMapping(value = TVSeriesRoutes.ADD, method = RequestMethod.POST)
     public String add(@RequestParam String title, @RequestParam String description,
                       @RequestParam String originalTitle, @RequestParam String producer,
-                      @RequestParam String countries, @RequestParam String genres) {
-        TVSeriesModel model = tvSeriesService.create(title, description, originalTitle, producer, countries, genres);
+                      @RequestParam String countries, @RequestParam String genres,
+                      @RequestParam MultipartFile picture) {
+        TVSeriesModel model = tvSeriesService.create(title, description, originalTitle, producer, countries, genres, picture);
 
         return "redirect:/tv/" + model.getId();
     }
@@ -55,8 +57,9 @@ public class TVSeriesController {
     public String edit(@PathVariable ObjectId id,
                        @RequestParam String title, @RequestParam String description,
                        @RequestParam String originalTitle, @RequestParam String producer,
-                       @RequestParam String countries, @RequestParam String genres) {
-        tvSeriesService.update(id, title, description, originalTitle, producer, countries, genres);
+                       @RequestParam String countries, @RequestParam String genres,
+                       @RequestParam(value = "picture", required = false) MultipartFile picture) {
+        tvSeriesService.update(id, title, description, originalTitle, producer, countries, genres, picture);
 
         return "redirect:/tv/" + id;
     }

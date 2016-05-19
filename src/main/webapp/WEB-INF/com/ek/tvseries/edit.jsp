@@ -14,7 +14,7 @@
             <h1>${tvSeriesModel.title}</h1>
         </div>
     </div>
-    <form action="<%=IndexRoutes.getRoute("")%>/tv/${tvSeriesModel.id}" method="post">
+    <form action="<%=IndexRoutes.getRoute("")%>/tv/${tvSeriesModel.id}" method="post" enctype="multipart/form-data">
         <div class="row">
             <div class="form-group col-md-6">
                 <input name="title" placeholder="Title" class="form-control" value="${tvSeriesModel.title}"/>
@@ -44,6 +44,16 @@
             <div class="form-group col-md-6">
                 <input name="genres" placeholder="Genres" class="form-control" value="${tvSeriesModel.formGenres()}"/>
             </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <input type="file" name="picture" class="form-control"/>
+            </div>
+            <c:if test="${not empty tvSeriesModel.picture}">
+                <div class="col-md-4">
+                    <img src="/pic/${tvSeriesModel.picture}" alt="${tvSeriesModel.originalTitle}" style="width: 100px;"/>
+                </div>
+            </c:if>
         </div>
         <div class="row">
             <div class="form-group col-md-4">
