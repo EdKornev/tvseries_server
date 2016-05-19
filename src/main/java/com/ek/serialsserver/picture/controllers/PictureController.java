@@ -3,7 +3,6 @@ package com.ek.serialsserver.picture.controllers;
 import com.ek.serialsserver.picture.routes.PictureRoutes;
 import com.ek.serialsserver.picture.services.PictureService;
 import com.mongodb.gridfs.GridFSDBFile;
-import com.mongodb.gridfs.GridFSFile;
 import org.apache.commons.io.IOUtils;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;

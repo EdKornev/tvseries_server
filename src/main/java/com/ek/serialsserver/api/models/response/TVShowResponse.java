@@ -16,7 +16,7 @@ public class TVShowResponse {
     private String originalTitle;
     private String description;
     private String producer;
-    private ObjectId picture;
+    private String picture;
     private List<String> genres = new ArrayList<String>();
     private List<String> countries = new ArrayList<String>();
 
@@ -34,6 +34,10 @@ public class TVShowResponse {
         this.genres = model.getGenres();
         this.countries = model.getCountries();
         this.seasons = seasons;
+
+        if (model.getPicture() != null) {
+            this.picture = model.getPicture().toString();
+        }
     }
 
     public String getId() {
@@ -100,11 +104,11 @@ public class TVShowResponse {
         this.seasons = seasons;
     }
 
-    public ObjectId getPicture() {
+    public String getPicture() {
         return picture;
     }
 
-    public void setPicture(ObjectId picture) {
+    public void setPicture(String picture) {
         this.picture = picture;
     }
 }
