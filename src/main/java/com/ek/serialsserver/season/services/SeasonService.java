@@ -31,11 +31,11 @@ public class SeasonService {
         return mongoTemplate.find(query, SeasonModel.class);
     }
 
-    public void create(Integer number, ObjectId tvShowId) {
+    public SeasonModel create(Integer number, ObjectId tvShowId) {
         TVSeriesModel tvSeriesModel = mongoTemplate.findById(tvShowId, TVSeriesModel.class);
 
         if (tvSeriesModel == null) {
-            return;
+            return null;
         }
 
         SeasonModel seasonModel = new SeasonModel();
@@ -43,6 +43,8 @@ public class SeasonService {
         seasonModel.setTvSeries(tvSeriesModel);
 
         mongoTemplate.save(seasonModel);
+
+        return seasonModel;
     }
 
     public SeasonModel addShow(ObjectId id, String title, String path, Integer number) {
