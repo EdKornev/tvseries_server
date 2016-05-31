@@ -3,7 +3,6 @@ package com.ek.serialsserver.season.controllers;
 import com.ek.serialsserver.season.models.SeasonModel;
 import com.ek.serialsserver.season.routes.SeasonRoutes;
 import com.ek.serialsserver.season.services.SeasonService;
-import com.ek.serialsserver.tvseries.routes.TVSeriesRoutes;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
