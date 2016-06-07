@@ -1,3 +1,4 @@
 /target
 /serials_server.iml
 /.idea
+/src/main/webapp/resources/database.properties

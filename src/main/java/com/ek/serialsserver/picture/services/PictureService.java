@@ -10,6 +10,8 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.InputStream;
+
 /**
  * Created by Eduard on 19.05.2016.
  */
@@ -28,14 +30,17 @@ public class PictureService {
         try {
             GridFSFile gridFSFile = fileService.uploadFile(file);
 
-            PictureDoc pictureDoc = new PictureDoc();
-            pictureDoc.setFileName(gridFSFile.getFilename());
-            pictureDoc.setContentType(gridFSFile.getContentType());
-            pictureDoc.setOriginalFileId((ObjectId) gridFSFile.getId());
+            return this.savePictureDoc(gridFSFile);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
-            mongoTemplate.save(pictureDoc);
+    public ObjectId save(InputStream inputStream) {
+        try {
+            GridFSFile gridFSFile = fileService.uploadFile(inputStream);
 
-            return pictureDoc.getId();
+            return this.savePictureDoc(gridFSFile);
         } catch (Exception e) {
             return null;
         }
@@ -46,5 +51,16 @@ public class PictureService {
 
         mongoTemplate.remove(pictureDoc);
         fileService.remove(pictureDoc.getOriginalFileId());
+    }
+
+    private ObjectId savePictureDoc(GridFSFile gridFSFile) {
+        PictureDoc pictureDoc = new PictureDoc();
+        pictureDoc.setFileName(gridFSFile.getFilename());
+        pictureDoc.setContentType(gridFSFile.getContentType());
+        pictureDoc.setOriginalFileId((ObjectId) gridFSFile.getId());
+
+        mongoTemplate.save(pictureDoc);
+
+        return pictureDoc.getId();
     }
 }

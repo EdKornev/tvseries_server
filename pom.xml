@@ -95,6 +95,13 @@
             <version>3.2.2</version>
         </dependency>
 
+        <!-- Parse html -->
+        <dependency>
+            <groupId>net.sourceforge.htmlcleaner</groupId>
+            <artifactId>htmlcleaner</artifactId>
+            <version>2.16</version>
+        </dependency>
+
     </dependencies>
 
     <build>

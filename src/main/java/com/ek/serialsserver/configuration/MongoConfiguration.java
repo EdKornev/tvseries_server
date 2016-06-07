@@ -1,6 +1,9 @@
 package com.ek.serialsserver.configuration;
 
-import com.mongodb.*;
+import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -8,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.env.Environment;
-import org.springframework.data.authentication.UserCredentials;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
@@ -46,11 +48,11 @@ public class MongoConfiguration extends AbstractMongoConfiguration {
     public Mongo mongo() throws Exception {
         if (isDebug) {
             ServerAddress serverAddress = new ServerAddress(env.getProperty("mongo.host"), 27017);
-            MongoCredential mongoCredential = MongoCredential.createMongoCRCredential(env.getProperty("mongo.username"), getDatabaseName(), env.getProperty("mongo.password").toCharArray());
+            MongoCredential mongoCredential = MongoCredential.createCredential(env.getProperty("mongo.username"), getDatabaseName(), env.getProperty("mongo.password").toCharArray());
             return new MongoClient(serverAddress, Arrays.asList(mongoCredential));
         } else {
             ServerAddress serverAddress = new ServerAddress(env.getProperty("mongo.prod.host"), 27017);
-            MongoCredential mongoCredential = MongoCredential.createMongoCRCredential(env.getProperty("mongo.prod.username"), getDatabaseName(), env.getProperty("mongo.prod.password").toCharArray());
+            MongoCredential mongoCredential = MongoCredential.createCredential(env.getProperty("mongo.prod.username"), getDatabaseName(), env.getProperty("mongo.prod.password").toCharArray());
             return new MongoClient(serverAddress, Arrays.asList(mongoCredential));
         }
     }

@@ -13,6 +13,15 @@
         <h1>All tv shows</h1>
     </div>
     <div class="row">
+        <c:url value="<%=TVSeriesRoutes.PARSE%>" var="parseUrl"/>
+        <form action="${parseUrl}" method="post">
+            <div class="form-group">
+                <input class="form-control" name="url" placeholder="Url" style="width: 20%; float: left; margin-right: 15px;"/>
+                <input type="submit" class="btn btn-default" value="Parse"/>
+            </div>
+        </form>
+    </div>
+    <div class="row">
         <a href="<%=IndexRoutes.getRoute(TVSeriesRoutes.ADD)%>" class="btn btn-success">Create tv series</a>
     </div>
     <div class="row">

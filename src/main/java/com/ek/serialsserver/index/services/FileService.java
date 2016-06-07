@@ -11,6 +11,8 @@ import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.InputStream;
+
 /**
  * Created by Eduard on 18.05.2016.
  */
@@ -21,6 +23,12 @@ public class FileService {
 
     public GridFSFile uploadFile(MultipartFile file) throws Exception {
         GridFSFile gridFSFile = gridFsTemplate.store(file.getInputStream(), file.getName(), file.getContentType());
+
+        return gridFSFile;
+    }
+
+    public GridFSFile uploadFile(InputStream inputStream) throws Exception {
+        GridFSFile gridFSFile = gridFsTemplate.store(inputStream, "image", "image/jpeg");
 
         return gridFSFile;
     }

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 /**
  * Created by Eduard on 04.05.2016.
  */
@@ -69,5 +71,16 @@ public class TVSeriesController {
         tvSeriesService.remove(id);
 
         return "redirect:/tv/all";
+    }
+
+    @RequestMapping(value = TVSeriesRoutes.PARSE, method = RequestMethod.POST)
+    public String parse(@RequestParam String url) {
+        try {
+            tvSeriesService.parse(url);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            return "redirect:/tv/all";
+        }
     }
 }

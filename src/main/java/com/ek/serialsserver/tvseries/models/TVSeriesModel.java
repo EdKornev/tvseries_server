@@ -16,6 +16,7 @@ public class TVSeriesModel {
     @Id
     private ObjectId id;
 
+    private String fsId;
     private String title;
     private String originalTitle;
     private String description;
@@ -111,5 +112,13 @@ public class TVSeriesModel {
 
     public void setPicture(ObjectId picture) {
         this.picture = picture;
+    }
+
+    public String getFsId() {
+        return fsId;
+    }
+
+    public void setFsId(String fsId) {
+        this.fsId = fsId;
     }
 }
